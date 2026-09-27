@@ -2,7 +2,7 @@
  * API client — all HTTP calls to the SkillSwap backend.
  */
 
-const API_BASE = 'http://localhost:8000/api/v1';
+const API_BASE = import.meta.env.VITE_API_BASE ?? 'http://localhost:8000/api/v1';
 
 function getToken() {
   return localStorage.getItem('skillswap_token');
