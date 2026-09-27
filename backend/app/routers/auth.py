@@ -39,8 +39,8 @@ def signup(body: SignupRequest, db: DBSession = Depends(get_db)):
     db.commit()
     db.refresh(user)
 
-    access_token = create_access_token({"sub": user.id})
-    refresh_token = create_refresh_token({"sub": user.id})
+    access_token = create_access_token({"sub": str(user.id)})
+    refresh_token = create_refresh_token({"sub": str(user.id)})
     return TokenResponse(access_token=access_token, refresh_token=refresh_token)
 
 
@@ -52,8 +52,8 @@ def login(body: LoginRequest, db: DBSession = Depends(get_db)):
             status_code=401,
             detail="Incorrect email or password. Please check and try again.",
         )
-    access_token = create_access_token({"sub": user.id})
-    refresh_token = create_refresh_token({"sub": user.id})
+    access_token = create_access_token({"sub": str(user.id)})
+    refresh_token = create_refresh_token({"sub": str(user.id)})
     return TokenResponse(access_token=access_token, refresh_token=refresh_token)
 
 
