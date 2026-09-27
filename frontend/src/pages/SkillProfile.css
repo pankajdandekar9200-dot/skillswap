@@ -1,0 +1,114 @@
+/* Skill Profile Builder styles */
+
+.skill-profile-header {
+  margin-bottom: var(--space-4);
+}
+
+.skill-profile-header h1 {
+  margin-bottom: var(--space-1);
+}
+
+.category-filter {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.skill-catalog {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.skill-catalog-item {
+  border: none;
+  background: none;
+  cursor: pointer;
+  padding: 0;
+  transition: transform var(--transition-fast), opacity var(--transition-fast);
+  position: relative;
+}
+.skill-catalog-item:hover:not(:disabled) {
+  transform: scale(1.05);
+}
+.skill-catalog-item.added {
+  opacity: 0.5;
+  cursor: default;
+}
+.skill-catalog-item.added svg {
+  position: absolute;
+  top: 50%;
+  right: 4px;
+  transform: translateY(-50%);
+  color: var(--success);
+}
+
+.selected-skills .skill-tag {
+  font-size: 14px;
+  padding: 8px 14px;
+}
+
+.proficiency-slider {
+  width: 100%;
+  height: 8px;
+  -webkit-appearance: none;
+  appearance: none;
+  background: var(--border-soft);
+  border-radius: var(--radius-pill);
+  outline: none;
+  margin: var(--space-1) 0;
+}
+.proficiency-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 22px;
+  height: 22px;
+  background: var(--brand-brown);
+  border-radius: 50%;
+  cursor: pointer;
+  border: 3px solid #fff;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+}
+.proficiency-slider::-moz-range-thumb {
+  width: 22px;
+  height: 22px;
+  background: var(--brand-brown);
+  border-radius: 50%;
+  cursor: pointer;
+  border: 3px solid #fff;
+}
+
+.avail-form {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-2);
+}
+
+.avail-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.avail-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-2) var(--space-3);
+}
+
+.avail-item > div {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.avail-time {
+  color: var(--ink-secondary);
+  font-size: 14px;
+}
+
+@media (max-width: 768px) {
+  .avail-form {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}

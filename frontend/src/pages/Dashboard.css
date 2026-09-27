@@ -1,0 +1,135 @@
+/* Dashboard styles */
+
+.dashboard-header {
+  margin-bottom: var(--space-3);
+}
+.dashboard-header h1 { margin-bottom: var(--space-1); }
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-3);
+}
+
+.stat-card {
+  text-align: center;
+  padding: var(--space-3);
+  border: none;
+}
+
+.stat-icon {
+  color: var(--brand-brown);
+  margin-bottom: var(--space-1);
+}
+
+.stat-value {
+  font-family: var(--font-display);
+  font-size: 36px;
+  font-weight: 700;
+  color: var(--ink-primary);
+  line-height: 1;
+  margin-bottom: 4px;
+}
+
+.stat-label {
+  font-size: 13px;
+  color: var(--ink-secondary);
+  font-weight: 500;
+}
+
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-3);
+}
+
+.dashboard-section h2 {
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+}
+
+.ml-1 { margin-left: var(--space-1); }
+
+/* Request cards */
+.request-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.request-card {
+  padding: var(--space-3);
+}
+
+.request-top {
+  display: flex;
+  gap: var(--space-2);
+  margin-bottom: var(--space-2);
+}
+
+.request-info strong {
+  font-size: 16px;
+}
+
+.request-skills {
+  font-size: 13px;
+  color: var(--ink-secondary);
+  margin: 4px 0 0;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  flex-wrap: wrap;
+}
+
+.request-msg {
+  font-size: 13px;
+  color: var(--ink-secondary);
+  margin: 4px 0 0;
+  font-style: italic;
+}
+
+.request-actions {
+  display: flex;
+  gap: var(--space-1);
+}
+
+/* Exchange cards */
+.exchange-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.exchange-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-2) var(--space-3);
+}
+
+/* Session cards */
+.session-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.session-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-2) var(--space-3);
+  text-decoration: none;
+  color: inherit;
+}
+
+@media (max-width: 1024px) {
+  .stats-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 768px) {
+  .stats-grid { grid-template-columns: repeat(2, 1fr); }
+  .dashboard-grid { grid-template-columns: 1fr; }
+}

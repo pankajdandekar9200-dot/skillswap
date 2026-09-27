@@ -1,0 +1,73 @@
+/* Sessions page styles */
+
+.session-tabs {
+  display: flex;
+  gap: 4px;
+  border-bottom: 2px solid var(--border-soft);
+  padding-bottom: 0;
+}
+
+.session-tab {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 20px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--ink-secondary);
+  border-bottom: 2px solid transparent;
+  margin-bottom: -2px;
+  transition: color var(--transition-fast), border-color var(--transition-fast);
+  font-family: var(--font-body);
+}
+.session-tab:hover {
+  color: var(--ink-primary);
+}
+.session-tab.active {
+  color: var(--brand-brown);
+  border-bottom-color: var(--brand-brown);
+}
+
+.session-list-full {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.session-detail-card {
+  padding: var(--space-3);
+}
+
+.session-detail-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: var(--space-2);
+}
+
+.session-detail-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin-bottom: var(--space-2);
+  padding: var(--space-2) 0;
+  border-top: 1px solid var(--border-soft);
+}
+
+.session-meta-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 14px;
+  color: var(--ink-secondary);
+}
+
+.session-detail-actions {
+  display: flex;
+  gap: var(--space-1);
+  padding-top: var(--space-2);
+  border-top: 1px solid var(--border-soft);
+}
