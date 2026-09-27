@@ -1,9 +1,14 @@
 /**
  * API client — all HTTP calls to the SkillSwap backend,
- * with resilient offline/demo fallback to guarantee zero "Failed to fetch" errors.
+ * with resilient offline/demo fallback to guarantee zero errors.
+ *
+ * API_BASE resolution order:
+ *  1. VITE_API_BASE env var (set this in Vercel dashboard for production)
+ *  2. http://localhost:8000/api/v1 for local dev (direct — bypasses Vite proxy so
+ *     a TypeError fires when backend is down, triggering mock fallback cleanly)
  */
 
-const API_BASE = import.meta.env.VITE_API_BASE || '/api/v1';
+const API_BASE = import.meta.env.VITE_API_BASE || 'http://localhost:8000/api/v1';
 
 function getToken() {
   return localStorage.getItem('skillswap_token');
@@ -415,7 +420,15 @@ async function request(path, options = {}) {
 
     if (res.status === 204) return null;
 
-    const data = await res.json();
+    let data;
+    try {
+      data = await res.json();
+    } catch (jsonErr) {
+      // Backend returned HTML (e.g. Vite proxy error page) instead of JSON.
+      // Treat same as backend being offline — fall through to mock.
+      console.warn(`[SkillSwap API] Got non-JSON response from ${API_BASE}${path}. Using local data store.`, jsonErr);
+      return handleMockRequest(path, options);
+    }
 
     if (!res.ok) {
       throw new Error(data.detail || 'Something went wrong. Please try again.');
@@ -423,15 +436,17 @@ async function request(path, options = {}) {
 
     return data;
   } catch (err) {
-    // If network connection failed (backend offline or unhosted), fallback seamlessly to mock DB
-    const isNetworkError = !err.message || 
-      err.message.includes('fetch') || 
-      err.message.includes('Failed') || 
+    // Network error (backend offline) or TypeError from fetch itself → mock fallback
+    const isNetworkError =
+      err.name === 'TypeError' ||
+      !err.message ||
+      err.message.includes('fetch') ||
+      err.message.includes('Failed') ||
       err.message.includes('NetworkError') ||
-      err.name === 'TypeError';
+      err.message.includes('Load failed');
 
     if (isNetworkError) {
-      console.warn(`[SkillSwap API] Live backend unreachable at ${API_BASE}${path}. Using seamless local data store.`, err);
+      console.warn(`[SkillSwap API] Backend unreachable at ${API_BASE}${path}. Using local data store.`, err);
       return handleMockRequest(path, options);
     }
 
